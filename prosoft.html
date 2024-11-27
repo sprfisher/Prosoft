@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The History of Prosoft</title>
+    <style>
+        /* Updated CSS for button-like answers */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+        }
+
+        #quiz-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        #question-container {
+            margin-top: 20px;
+        }
+
+        .choice-button {
+            display: block;
+            margin: 10px 0;
+            padding: 10px 20px;
+            background: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            text-align: left;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .choice-button:hover {
+            background: #0056b3;
+        }
+
+        #feedback {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-left: 5px solid #ccc;
+        }
+
+        #next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            display: none;
+        }
+
+        #next-button:disabled {
+            background: #aaa;
+        }
+    </style>
+</head>
+<body>
+    <div id="quiz-container">
+        <h1>The History of Prosoft</h1>
+        <div id="question-container"></div>
+        <button id="next-button">Next Question</button>
+        <div id="feedback"></div>
+    </div>
+    <script>
+        // Updated JavaScript for button-like answers
+        const questions = [
+    {
+        question: "In which city is Prosoft, Inc. headquartered?",
+        choices: [
+            "Miami, FL",
+            "Orlando, FL",
+            "Tampa, FL",
+            "Jacksonville, FL"
+        ],
+        correctAnswer: 2,
+        explanation: "Prosoft, Inc. is headquartered in Tampa, Florida, where it specializes in computer systems design and related services."
+    },
+    {
+        question: "Who is the president of Prosoft, Inc.?",
+        choices: [
+            "John Smith",
+            "George Andreu",
+            "Michael Johnson",
+            "David Lee"
+        ],
+        correctAnswer: 1,
+        explanation: "George Andreu serves as the president of Prosoft, Inc., overseeing the company's operations."
+    },
+    {
+        question: "What industry does Prosoft, Inc. operate in?",
+        choices: [
+            "Healthcare",
+            "Computer Systems Design and Related Services",
+            "Retail",
+            "Manufacturing"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. specializes in computer systems design and related services, offering custom software solutions."
+    },
+    {
+        question: "When was Prosoft, Inc. established?",
+        choices: [
+            "1975",
+            "1979",
+            "1985",
+            "1990"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. was established in 1979, providing decades of service in the tech industry."
+    },
+    {
+        question: "What is the approximate annual revenue of Prosoft, Inc.?",
+        choices: [
+            "$500,000",
+            "$1,023,826",
+            "$2,000,000",
+            "$5,000,000"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. generates approximately $1,023,826 in annual revenue, reflecting its success in the software industry."
+    },
+    {
+        question: "What is the address of Prosoft, Inc.?",
+        choices: [
+            "6018 E Columbus Dr.",
+            "123 Main St.",
+            "789 Pine Rd.",
+            "456 Oak Ave."
+        ],
+        correctAnswer: 0,
+        explanation: "The company's address is 6018 E Columbus Dr., Tampa, FL 33619."
+    },
+    {
+        question: "How many employees does Prosoft, Inc. have approximately?",
+        choices: [
+            "5",
+            "12",
+            "50",
+            "100"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. is a small company with approximately 12 employees."
+    },
+    {
+        question: "What is the primary contact email for Prosoft, Inc.?",
+        choices: [
+            "info@prosoft.com",
+            "george@prosoft.com",
+            "support@prosoft.com",
+            "sales@prosoft.com"
+        ],
+        correctAnswer: 1,
+        explanation: "The primary contact email for Prosoft, Inc. is george@prosoft.com, used for business inquiries."
+    },
+    {
+        question: "What type of business is Prosoft, Inc. registered as?",
+        choices: [
+            "Non-profit",
+            "S-Corporation",
+            "C-Corporation",
+            "LLC"
+        ],
+        correctAnswer: 2,
+        explanation: "Prosoft, Inc. is registered as a C-Corporation."
+    },
+    {
+        question: "What is the contact phone number for Prosoft, Inc.?",
+        choices: [
+            "(813) 626-8778",
+            "(305) 123-4567",
+            "(407) 987-6543",
+            "(561) 555-7890"
+        ],
+        correctAnswer: 0,
+        explanation: "Prosoft, Inc. can be reached at (813) 626-8778."
+    },
+    {
+        question: "What does Prosoft, Inc. specialize in?",
+        choices: [
+            "Retail Sales",
+            "Construction",
+            "Custom Software Development",
+            "Medical Technology"
+        ],
+        correctAnswer: 2,
+        explanation: "Prosoft, Inc. specializes in custom software development and IT solutions."
+    },
+    {
+        question: "Who is the registered agent for Prosoft, Inc.?",
+        choices: [
+            "John Doe",
+            "George Andreu",
+            "Sarah Johnson",
+            "Michael Smith"
+        ],
+        correctAnswer: 1,
+        explanation: "George Andreu serves as the registered agent for Prosoft, Inc."
+    },
+    {
+        question: "What classification applies to Prosoft, Inc. under NAICS?",
+        choices: [
+            "NAICS 541511",
+            "NAICS 621111",
+            "NAICS 236220",
+            "NAICS 722511"
+        ],
+        correctAnswer: 0,
+        explanation: "Prosoft, Inc. falls under NAICS 541511, which corresponds to Custom Computer Programming Services."
+    },
+    {
+        question: "What software solutions are most associated with Prosoft, Inc.?",
+        choices: [
+            "Healthcare Platforms",
+            "E-commerce Systems",
+            "Custom Enterprise Applications",
+            "Gaming Applications"
+        ],
+        correctAnswer: 2,
+        explanation: "Prosoft, Inc. is most known for delivering custom enterprise software solutions."
+    },
+    {
+        question: "What major Florida city is home to Prosoft, Inc.?",
+        choices: [
+            "Orlando",
+            "Tampa",
+            "Miami",
+            "Jacksonville"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. is based in Tampa, Florida."
+    },
+    {
+        question: "What is the name of the annual report Prosoft, Inc. files with the state of Florida?",
+        choices: [
+            "2023 Corporate Tax Report",
+            "Florida Profit Corporation Annual Report",
+            "Quarterly Financial Statement",
+            "Business Compliance Form"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. files the Florida Profit Corporation Annual Report each year to maintain its business registration."
+    },
+    {
+        question: "What is one of the key services offered by Prosoft, Inc.?",
+        choices: [
+            "Cloud Migration Services",
+            "Retail Solutions",
+            "Architecture and Engineering",
+            "Agricultural Innovation"
+        ],
+        correctAnswer: 0,
+        explanation: "Prosoft, Inc. offers cloud migration services as part of its IT solutions."
+    },
+    {
+        question: "How does Prosoft, Inc. primarily generate revenue?",
+        choices: [
+            "Selling physical hardware",
+            "Offering subscription-based software solutions",
+            "Custom IT consulting and software development",
+            "Advertising revenue"
+        ],
+        correctAnswer: 2,
+        explanation: "The company generates revenue through IT consulting and custom software development services."
+    },
+    {
+        question: "What year did George Andreu become president of Prosoft, Inc.?",
+        choices: [
+            "1979",
+            "1985",
+            "1990",
+            "2000"
+        ],
+        correctAnswer: 0,
+        explanation: "George Andreu became president when the company was established in 1979."
+    },
+    {
+        question: "What is Prosoft, Inc.'s primary focus?",
+        choices: [
+            "Environmental Consulting",
+            "Computer Programming Services",
+            "Retail Store Management",
+            "Travel and Tourism"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft, Inc. focuses on computer programming and IT-related services."
+    },
+    {
+        question: "Which of the following best describes Prosoft’s target clients?",
+        choices: [
+            "Retail consumers",
+            "Small to medium-sized businesses",
+            "Agricultural companies",
+            "Hospitals"
+        ],
+        correctAnswer: 1,
+        explanation: "Prosoft primarily targets small to medium-sized businesses for its software solutions."
+    }
+];
+
+        let currentQuestion = 0;
+        let score = 0;
+
+        const questionContainer = document.getElementById("question-container");
+        const feedbackContainer = document.getElementById("feedback");
+        const nextButton = document.getElementById("next-button");
+
+        function loadQuestion() {
+            const question = questions[currentQuestion];
+            questionContainer.innerHTML = `
+                <h2>${question.question}</h2>
+                ${question.choices.map((choice, index) => `
+                    <button class="choice-button" data-choice="${index}">${choice}</button>
+                `).join('')}
+            `;
+            feedbackContainer.innerHTML = "";
+            nextButton.style.display = "none";
+
+            const choiceButtons = document.querySelectorAll(".choice-button");
+            choiceButtons.forEach(button => {
+                button.addEventListener("click", (e) => {
+                    const userAnswer = parseInt(e.target.getAttribute("data-choice"));
+                    checkAnswer(userAnswer);
+                });
+            });
+        }
+
+        function checkAnswer(userAnswer) {
+            const question = questions[currentQuestion];
+            const isCorrect = userAnswer === question.correctAnswer;
+            feedbackContainer.innerHTML = `
+                <p>${isCorrect ? "Correct!" : "Incorrect."}</p>
+                <p>${isCorrect ? "" : `The correct answer is: ${question.choices[question.correctAnswer]}`}</p>
+                <p>${question.explanation}</p>
+            `;
+            if (isCorrect) score++;
+            nextButton.style.display = "block";
+
+            // Disable buttons after selecting an answer
+            const choiceButtons = document.querySelectorAll(".choice-button");
+            choiceButtons.forEach(button => button.disabled = true);
+        }
+
+        nextButton.addEventListener("click", () => {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                questionContainer.innerHTML = `
+                    <h2>Quiz Complete!</h2>
+                    <p>Your Score: ${score} / ${questions.length}</p>
+                `;
+                nextButton.style.display = "none";
+            }
+        });
+
+        // Load the first question on startup
+        loadQuestion();
+    </script>
+</body>
+</html>
